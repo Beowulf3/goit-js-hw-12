@@ -22,7 +22,8 @@ let totalPages = 0;
 async function onSearch() {
   pageNumber = 1;
   clearGallery();
-  if (!input.value) {
+  hideLoadMoreButton();
+  if (!input.value.trim()) {
     iziError('Empty input. Please type images you want ot find!');
     return;
   }
@@ -46,7 +47,11 @@ async function onSearch() {
       closeOnEscape: true,
       closeOnClick: true,
     });
-    showLoadMoreButton();
+    if (pageNumber === totalPages) {
+      return;
+    } else {
+      showLoadMoreButton();
+    }
   } catch (error) {
     console.log(error);
     iziError('Oops... Something went wrong. Please, try again!');
