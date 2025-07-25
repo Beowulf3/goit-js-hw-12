@@ -20,6 +20,7 @@ let pageNumber = 1;
 let totalPages = 0;
 
 async function onSearch() {
+  pageNumber = 1;
   clearGallery();
   if (!input.value) {
     iziError('Empty input. Please type images you want ot find!');
@@ -45,12 +46,12 @@ async function onSearch() {
       closeOnEscape: true,
       closeOnClick: true,
     });
+    showLoadMoreButton();
   } catch (error) {
     console.log(error);
     iziError('Oops... Something went wrong. Please, try again!');
   } finally {
     hideLoader();
-    showLoadMoreButton();
   }
 }
 
